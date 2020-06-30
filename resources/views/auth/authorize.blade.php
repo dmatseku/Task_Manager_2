@@ -1,21 +1,25 @@
 @extends('layouts.auth')
 
+@php
+$is_login = $type === "login";
+@endphp
+
 @section('content')
     <div class="card border-0 rounded-lg">
         {{--    header    --}}
         <div class="card-header bg-dark pb-0 border-0 rounded-top-lg">
-            <h4 class="text-white">{{ __('Authorization') }}</h4>
+            <h5 class="text-white mb-2">{{ __('Authorization') }}</h5>
             <div class="d-flex">
-                <button type="button" id="register-btn" class="btn m-0 rounded-top-lg btn-light">
-                    {{ __('Register') }}
-                </button>
-                <button type="button" id="login-btn" class="btn m-0 rounded-top-lg btn-dark">
+                <button type="button" id="login-btn" class="btn m-0 rounded-top-lg {{ $is_login ? "btn-light" : "btn-dark" }}">
                     {{ __('Login') }}
+                </button>
+                <button type="button" id="register-btn" class="btn m-0 rounded-top-lg {{ $is_login ? "btn-dark" : "btn-light" }}">
+                    {{ __('Register') }}
                 </button>
             </div>
         </div>
         {{--    login    --}}
-        <form id="login-form" method="POST" action="{{ route('login') }}" class="card-body w-100 d-none">
+        <form id="login-form" method="POST" action="{{ route('login') }}" class="card-body w-100 {{ $is_login ? "" : "d-none" }}">
             @csrf
 
             <div class="form-group row">
@@ -73,7 +77,7 @@
             </div>
         </form>
         {{--    register    --}}
-        <form id="register-form" method="POST" action="{{ route('register') }}" class="card-body w-100">
+        <form id="register-form" method="POST" action="{{ route('register') }}" class="card-body w-100 {{ $is_login ? "d-none" : "" }}">
         @csrf
 
             <div class="form-group row">

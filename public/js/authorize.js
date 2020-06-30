@@ -101,6 +101,8 @@ $(document).ready(function () {
       $("#register-form").removeClass("d-none");
       $("#login-form").addClass("d-none");
     }
+
+    $("#register-btn").blur();
   });
   $("#login-btn").focusin(function () {
     if ($("#login-form").css("display") === "none") {
@@ -109,6 +111,8 @@ $(document).ready(function () {
       $("#register-form").addClass("d-none");
       $("#login-form").removeClass("d-none");
     }
+
+    $("#login-btn").blur();
   });
 });
 
