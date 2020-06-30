@@ -1,0 +1,17 @@
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+
+main {
+    height: 100%;
+    width: 100%;
+    &>div {
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    }
+}
+
+.rounded-top-lg {
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.py-6 {
+    padding: 6rem 0;
+}
