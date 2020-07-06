@@ -14,8 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
-
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+//home
+Route::get('/', function() {
+    return redirect('/home');
+});
+
+Route::get('/home', 'ListController@index')->name('home');
+
+//about
+Route::get('/about', 'ListController@index')->name('about');
+
+//watch task
+Route::get('/task', 'TaskController@index')->name('task');
+
+//modifying task
+Route::post('/task/next_status', 'TaskController@nextStatus')->name('task/next_status');
+Route::post('/task/delete', 'TaskController@delete')->name('task/delete');

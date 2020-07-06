@@ -1,0 +1,103 @@
+$task-table-color: #F5F5F5;
+$task-cell-color: #DDDDDD;
+$began-color: #65AA09;
+$finished-color: #4F7E10;
+
+table {
+
+    thead {
+        .cell-name, .cell-type, .cell-status {
+            border-right: 1px solid #FFFFFF !important;
+        }
+
+        th {
+            font-size: 1.25rem !important;
+        }
+    }
+    tbody {
+        background-color: $task-table-color;
+
+        tr {
+            td {
+                background-color: $task-cell-color;
+                height: 3rem;
+                font-size: 1.1rem !important;
+            }
+
+            .cell-name {
+                background-color: $task-table-color;
+
+                button {
+                    &:hover {
+                        background-color: $task-cell-color;
+                    }
+
+                    span {
+                        font-size: 1.25rem !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .cell-name {
+        width: 40% !important;
+    }
+    .cell-type {
+        width: 15% !important;
+    }
+    .cell-status {
+        width: 20% !important;
+    }
+    .cell-actions {
+        width: 25% !important;
+
+        button {
+            width: 5rem;
+        }
+    }
+}
+
+#content-table {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.bg-began {
+    background-color: $began-color;
+    color: #FFFFFF;
+}
+
+.bg-finished {
+    background-color: $finished-color;
+    color: #FFFFFF;
+}
+
+.btn-begin {
+    border-color: $began-color;
+    background-color: $began-color;
+    color: #FFFFFF;
+
+    &:hover {
+        border-color: darken($began-color, 5%);
+        background-color: darken($began-color, 5%);
+        color: #FFFFFF;
+    }
+}
+
+.btn-finish {
+    border-color: $finished-color;
+    background-color: $finished-color;
+    color: #FFFFFF;
+
+    &:hover {
+        border-color: darken($finished-color, 5%);
+        background-color: darken($finished-color, 5%);
+        color: #FFFFFF;
+    }
+}

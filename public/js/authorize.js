@@ -93,28 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  $("#register-btn").focusin(function () {
-    if ($("#register-form").css("display") === "none") {
-      $("#register-btn").removeClass("btn-dark").addClass("btn-light");
-      $("#login-btn").removeClass("btn-light").addClass("btn-dark");
-      $("#register-form").removeClass("d-none");
-      $("#login-form").addClass("d-none");
-    }
-
-    $("#register-btn").blur();
-  });
-  $("#login-btn").focusin(function () {
-    if ($("#login-form").css("display") === "none") {
-      $("#register-btn").removeClass("btn-light").addClass("btn-dark");
-      $("#login-btn").removeClass("btn-dark").addClass("btn-light");
-      $("#register-form").addClass("d-none");
-      $("#login-form").removeClass("d-none");
-    }
-
-    $("#login-btn").blur();
-  });
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/kamikoto/Projects/web/php/task_manager_2/resources/js/auth/authorize.js'");
 
 /***/ }),
 

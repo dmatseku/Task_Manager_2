@@ -1,0 +1,96 @@
+table thead .cell-name,
+table thead .cell-type,
+table thead .cell-status {
+  border-right: 1px solid #FFFFFF !important;
+}
+
+table thead th {
+  font-size: 1.25rem !important;
+}
+
+table tbody {
+  background-color: #F5F5F5;
+}
+
+table tbody tr td {
+  background-color: #DDDDDD;
+  height: 3rem;
+  font-size: 1.1rem !important;
+}
+
+table tbody tr .cell-name {
+  background-color: #F5F5F5;
+}
+
+table tbody tr .cell-name button:hover {
+  background-color: #DDDDDD;
+}
+
+table tbody tr .cell-name button span {
+  font-size: 1.25rem !important;
+}
+
+table .cell-name {
+  width: 40% !important;
+}
+
+table .cell-type {
+  width: 15% !important;
+}
+
+table .cell-status {
+  width: 20% !important;
+}
+
+table .cell-actions {
+  width: 25% !important;
+}
+
+table .cell-actions button {
+  width: 5rem;
+}
+
+#content-table {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+#content-table::-webkit-scrollbar {
+  display: none;
+}
+
+.bg-began {
+  background-color: #65AA09;
+  color: #FFFFFF;
+}
+
+.bg-finished {
+  background-color: #4F7E10;
+  color: #FFFFFF;
+}
+
+.btn-begin {
+  border-color: #65AA09;
+  background-color: #65AA09;
+  color: #FFFFFF;
+}
+
+.btn-begin:hover {
+  border-color: #579208;
+  background-color: #579208;
+  color: #FFFFFF;
+}
+
+.btn-finish {
+  border-color: #4F7E10;
+  background-color: #4F7E10;
+  color: #FFFFFF;
+}
+
+.btn-finish:hover {
+  border-color: #41670d;
+  background-color: #41670d;
+  color: #FFFFFF;
+}
+

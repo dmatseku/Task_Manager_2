@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('greater_date', function ($attribute, $value, $parameters, $validator) {
+            $less = $validator->getData()[$parameters[0]];
+            return $value > $less;
+        });
     }
 }

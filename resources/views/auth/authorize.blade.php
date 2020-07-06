@@ -10,12 +10,12 @@ $is_login = $type === "login";
         <div class="card-header bg-dark pb-0 border-0 rounded-top-lg">
             <h5 class="text-white mb-2">{{ __('Authorization') }}</h5>
             <div class="d-flex">
-                <button type="button" id="login-btn" class="btn m-0 rounded-top-lg {{ $is_login ? "btn-light" : "btn-dark" }}">
+                <a href="{{ route('login') }}" role="button" id="login-btn" class="btn m-0 rounded-top-lg {{ $is_login ? "btn-light" : "btn-dark" }}">
                     {{ __('Login') }}
-                </button>
-                <button type="button" id="register-btn" class="btn m-0 rounded-top-lg {{ $is_login ? "btn-dark" : "btn-light" }}">
+                </a>
+                <a href="{{ route('register') }}" role="button" id="register-btn" class="btn m-0 rounded-top-lg {{ $is_login ? "btn-dark" : "btn-light" }}">
                     {{ __('Register') }}
-                </button>
+                </a>
             </div>
         </div>
         {{--    login    --}}
