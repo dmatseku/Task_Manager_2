@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TaskRepository;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ListController extends Controller
 {
@@ -38,19 +40,24 @@ class ListController extends Controller
      */
     public function index(Request $request)
     {
-        $inputs = $request->validate([
-            'search' => 'string|max:255'
+        $validator = Validator::make($request->all(), [
+            'search' => 'string|max:255|nullable'
         ]);
 
-        $this->tasks->updateStatuses();
-
-        $result = $this->tasks->getFor($request->user(), ($inputs['search'] ?? ''))->toArray();
-
-        if ($request->ajax()) {
-            return response()->json($result);
+        if ($validator->fails()) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false], 400);
+            }
+            return redirect('/home')
+                ->withErrors($validator)
+                ->withInput();
         }
 
-        return view('tasks.list', [
+        $this->tasks->updateStatuses();
+        $search = $request->input('search', '');
+        $result = $this->tasks->getFor($request->user(), $search ?? '')->toArray();
+
+        return view('tasks.'.($request->ajax() ? 'part_list' : 'list'), [
             "taskList" => $result
         ]);
     }

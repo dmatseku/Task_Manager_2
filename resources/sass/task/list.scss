@@ -3,22 +3,30 @@ $task-cell-color: #DDDDDD;
 $began-color: #65AA09;
 $finished-color: #4F7E10;
 
-table {
+#table {
 
-    thead {
+    #thead {
         .cell-name, .cell-type, .cell-status {
             border-right: 1px solid #FFFFFF !important;
         }
 
-        th {
+        div {
             font-size: 1.25rem !important;
         }
     }
-    tbody {
+    #tbody {
+        max-height: 70vh;
         background-color: $task-table-color;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
 
-        tr {
-            td {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .list-group-item {
+            .cell {
                 background-color: $task-cell-color;
                 height: 3rem;
                 font-size: 1.1rem !important;
@@ -58,46 +66,36 @@ table {
     }
 }
 
-#content-table {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-
 .bg-began {
-    background-color: $began-color;
-    color: #FFFFFF;
+    background-color: $began-color !important;
+    color: #FFFFFF !important;
 }
 
 .bg-finished {
-    background-color: $finished-color;
-    color: #FFFFFF;
+    background-color: $finished-color !important;
+    color: #FFFFFF !important;
 }
 
 .btn-begin {
-    border-color: $began-color;
-    background-color: $began-color;
-    color: #FFFFFF;
+    border-color: $began-color !important;
+    background-color: $began-color !important;
+    color: #FFFFFF !important;
 
     &:hover {
-        border-color: darken($began-color, 5%);
-        background-color: darken($began-color, 5%);
-        color: #FFFFFF;
+        border-color: darken($began-color, 5%) !important;
+        background-color: darken($began-color, 5%) !important;
+        color: #FFFFFF !important;
     }
 }
 
 .btn-finish {
-    border-color: $finished-color;
-    background-color: $finished-color;
-    color: #FFFFFF;
+    border-color: $finished-color !important;
+    background-color: $finished-color !important;
+    color: #FFFFFF !important;
 
     &:hover {
-        border-color: darken($finished-color, 5%);
-        background-color: darken($finished-color, 5%);
-        color: #FFFFFF;
+        border-color: darken($finished-color, 5%) !important;
+        background-color: darken($finished-color, 5%) !important;
+        color: #FFFFFF !important;
     }
 }

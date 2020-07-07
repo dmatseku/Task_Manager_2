@@ -3,5 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/css/auth.css": "/css/auth.css",
     "/css/authorize.css": "/css/authorize.css",
-    "/css/list.css": "/css/list.css"
+    "/css/list.css": "/css/list.css",
+    "/js/list.js": "/js/list.js"
 }

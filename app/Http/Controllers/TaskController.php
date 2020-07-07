@@ -73,7 +73,11 @@ class TaskController extends Controller
         $this->tasks->setNextStatus($task);
 
         if ($request->ajax()) {
-            return response()->json(['status' => $task->status]);
+            return response()->json([
+                'status' => $task->status,
+                'begin_in' => $task->begin_in,
+                'finish_in' => $task->finish_in,
+            ]);
         }
         return redirect()->action('TaskController@index', ['task_id' => $task->task_id]);
     }
@@ -83,7 +87,7 @@ class TaskController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      *
      * @throws \Exception
      */
@@ -95,6 +99,9 @@ class TaskController extends Controller
         $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
         $this->tasks->deleteTask($task);
 
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return redirect('/home');
     }
 

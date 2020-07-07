@@ -78,7 +78,7 @@ class TaskRepository extends Model
     {
         $task = $user->tasks()->where('id', '=', $task_id)->limit(1)->get();
         if (!count($task)) {
-            abort(404);
+            abort(403);
         }
         return $task->first();
     }
