@@ -28,6 +28,9 @@ Route::get('/', function() {
 });
 Route::get('/home', 'ListController@index')->name('home');
 
+//create task
+Route::get('/task/create', 'TaskController@createTask')->name('task/create');
+
 //watch task
 Route::get('/task', 'TaskController@index')->name('task');
 

@@ -21,7 +21,7 @@
             @csrf
             <input type="text" class="form-control w-100 @error('search') is-invalid @enderror" name="search" placeholder="Search">
         </form>
-        <a href="{{ route('task') }}" role="button" class="btn btn-secondary"><span class="h4 mb-0">+</span></a>
+        <a href="{{ route('task/create') }}" role="button" class="btn btn-secondary"><span class="h4 mb-0">+</span></a>
     </div>
 
     {{-- Table --}}

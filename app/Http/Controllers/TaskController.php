@@ -31,25 +31,19 @@ class TaskController extends Controller
     }
 
     /**
-     *
-     * Show task details. Create new task if input is empty
+     * Show task details
      *
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function index(Request $request)
     {
         $inputs = $request->validate([
-            'task_id' => 'numeric|min:1|nullable'
+            'task_id' => 'required|numeric|min:1'
         ]);
 
-        if (!$request->has('task_id') || empty($inputs['task_id'])) {
-            $task = $this->tasks->createTask($request->user());
-        } else {
-            $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
-        }
+        $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
 
         $this->tasks->updateStatusFor($task);
 
@@ -57,6 +51,19 @@ class TaskController extends Controller
             'task' => $task->toArray(),
             'types' => Task::getTypesArray()
         ]);
+    }
+
+    /**
+     * Create new task and redirect to review of this task
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createTask(Request $request)
+    {
+        $task = $this->tasks->createTask($request->user());
+        return redirect()->route('task', ['task_id' => $task->id]);
     }
 
     /**
@@ -82,7 +89,7 @@ class TaskController extends Controller
                 'finish_in' => $task->finish_in,
             ]);
         }
-        return redirect('task', ['task_id' => $task->task_id]);
+        return redirect()->action('TaskController@index', ['task_id' => $task->task_id]);
     }
 
     /**
