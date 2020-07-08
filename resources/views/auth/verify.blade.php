@@ -19,6 +19,14 @@
                 @csrf
                 <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
             </form>
+
+            <div class="form-group row mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <a href="{{ route('home') }}" class="btn btn-primary">
+                        {{ __('Verified') }}
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
