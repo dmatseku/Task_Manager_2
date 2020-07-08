@@ -1,0 +1,49 @@
+#task #header #name-field {
+  font-size: 1.25rem !important;
+  cursor: text;
+}
+
+#task #main {
+  background-color: #F5F5F5;
+}
+
+#task #main #description-field {
+  cursor: text;
+  font-size: 1rem;
+  min-height: 15rem;
+  resize: none;
+}
+
+#task #main hr {
+  border-top: 1px solid;
+}
+
+#task #footer #buttons-panel button span,
+#task #footer #buttons-panel a span {
+  font-size: 1.1rem !important;
+}
+
+.btn-begin {
+  border-color: #65AA09 !important;
+  background-color: #65AA09 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-begin:hover {
+  border-color: #579208 !important;
+  background-color: #579208 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-finish {
+  border-color: #4F7E10 !important;
+  background-color: #4F7E10 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-finish:hover {
+  border-color: #41670d !important;
+  background-color: #41670d !important;
+  color: #FFFFFF !important;
+}
+

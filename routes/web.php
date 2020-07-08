@@ -14,21 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//auth
 Auth::routes(['verify' => true]);
+
+//about
+Route::get('/about', function() {
+    return view('about');
+})->name('about');
 
 //home
 Route::get('/', function() {
     return redirect('/home');
 });
-
 Route::get('/home', 'ListController@index')->name('home');
-
-//about
-Route::get('/about', 'ListController@index')->name('about');
 
 //watch task
 Route::get('/task', 'TaskController@index')->name('task');
 
 //modifying task
+Route::post('/task/change', 'TaskController@changeTask')->name('task/change');
 Route::post('/task/next_status', 'TaskController@nextStatus')->name('task/next_status');
 Route::post('/task/delete', 'TaskController@delete')->name('task/delete');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Repositories\TaskRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -41,19 +42,20 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $inputs = $request->validate([
-            'task_id' => 'required|numeric|min:1|nullable'
+            'task_id' => 'numeric|min:1|nullable'
         ]);
 
-        if (!isset($inputs['task_id']) || empty($inputs['task_id'])) {
+        if (!$request->has('task_id') || empty($inputs['task_id'])) {
             $task = $this->tasks->createTask($request->user());
         } else {
             $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
         }
 
-        $this->tasks->updateStatusFor($task->id);
+        $this->tasks->updateStatusFor($task);
 
-        return view('task', [
-            'task' => $task->toArray()
+        return view('tasks.task', [
+            'task' => $task->toArray(),
+            'types' => Task::getTypesArray()
         ]);
     }
 
@@ -64,7 +66,8 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function nextStatus(Request $request) {
+    public function nextStatus(Request $request)
+    {
         $inputs = $request->validate([
             'task_id' => 'required|numeric|min:1',
         ]);
@@ -91,7 +94,8 @@ class TaskController extends Controller
      *
      * @throws \Exception
      */
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         $inputs = $request->validate([
             'task_id' => 'required|numeric|min:1',
         ]);
@@ -106,94 +110,56 @@ class TaskController extends Controller
     }
 
     /**
-     * change name for task
+     * Change some of properties of task
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function changeName(Request $request)
+    public function changeTask(Request $request)
     {
-        $inputs = $request->validate([
+        $validator = Validator::make($request->all(), [
             'task_id' => 'required|numeric|min:1',
-            'name' => 'required|string|min:1|max:255',
+            'name' => 'min:1|max:255|string',
+            'description' => 'nullable|string|min:1|max:1020',
+            'type' => [Rule::in([1, 2, 3, 4])],
+            'begin_in' => 'date|required_with:finish_in',
+            'finish_in' => 'date|required_with:begin_in|greater_date:begin_in',
+        ], [
+            'name.required' => 'Name can\'t be empty.',
+            'name.string' => 'Name can\'t be empty.',
+            'finish_date.greater_date' => 'Finish date can\'t be earlier than begin date.',
         ]);
 
-        $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
-        $this->tasks->updateTask($task, $inputs['name']);
-
-        if ($request->ajax()) {
-            return response()->json(['status' => 'saved']);
+        if ($validator->fails()) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->getMessageBag()->toArray()
+                ], 400);
+            }
+            return redirect()->back()
+                ->withErrors($validator);
         }
-        return redirect()->action('TaskController@index', ['task_id' => $task->task_id]);
-    }
 
-    /**
-     * Change description for task
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     */
-    public function changeDescription(Request $request)
-    {
-        $inputs = $request->validate([
-            'task_id' => 'required|numeric|min:1',
-            'description' => 'required|string|max:500',
-        ]);
+        $task = $this->tasks->getOneFor($request->user(), $request->input('task_id'));
 
-        $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
-        $this->tasks->updateTask($task, null, $inputs['description']);
-
-        if ($request->ajax()) {
-            return response()->json(['status' => 'saved']);
+        // Input description can be empty as null, but for the repository, this means nothing to change.
+        // So we need to detect and change description
+        $description = $request->input('description', null);
+        if ($description === null && $request->has('description')) {
+            $description = '';
         }
-        return redirect()->action('TaskController@index', ['task_id' => $task->task_id]);
-    }
 
-    /**
-     * Change type for task
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     */
-    public function changeType(Request $request)
-    {
-        $inputs = $request->validate([
-            'task_id' => 'required|numeric|min:1',
-            'type' => ['required', Rule::in([1, 2, 3, 4])],
-        ]);
-
-        $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
-        $this->tasks->updateTask($task, null, null, null, null, $inputs['name']);
+        $this->tasks->updateTask($task,
+                                 $request->input('name', null),
+                                 $description,
+                                 $request->input('begin_in', null),
+                                 $request->input('finish_in', null),
+                                 $request->input('type', null));
 
         if ($request->ajax()) {
-            return response()->json(['status' => 'saved']);
-        }
-        return redirect()->action('TaskController@index', ['task_id' => $task->task_id]);
-    }
-
-    /**
-     * Change dates for task
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     */
-    public function changeDates(Request $request)
-    {
-        $inputs = $request->validate([
-            'task_id' => 'required|numeric|min:1',
-            'begin_in' => 'required|date|required_with:finish_in',
-            'finish_in' => 'required|date|required_with:begin_in|greater_date:begin_in',
-        ]);
-
-        $task = $this->tasks->getOneFor($request->user(), $inputs['task_id']);
-        $this->tasks->updateTask($task, null, null, $request['begin_in'], $request['finish_in']);
-
-        if ($request->ajax()) {
-            return response()->json(['status' => 'saved']);
+            return response()->json(['success' => true, 'status' => $task->status]);
         }
         return redirect()->action('TaskController@index', ['task_id' => $task->task_id]);
     }

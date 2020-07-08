@@ -33,12 +33,10 @@ class TaskRepository extends Model
      *
      * Update status of one task by them begin_in and finish_in columns
      *
-     * @param int $task_id
-     *
+     * @param Task $task
      */
-    public function updateStatusFor(int $task_id)
+    public function updateStatusFor(Task $task)
     {
-        $task = Task::find($task_id);
         $date_now = date('Y-m-d');
 
         if ($task->finish_in <= $date_now) {
@@ -61,7 +59,7 @@ class TaskRepository extends Model
      */
     public function getFor(User $user, string $pattern)
     {
-        return ($user->tasks()->where('name', 'like', '%'.trim($pattern).'%')->get());
+        return ($user->tasks()->where('name', 'like', '%'.trim($pattern).'%')->orderByDesc('id')->get());
     }
 
     /**
@@ -124,14 +122,12 @@ class TaskRepository extends Model
     {
         $date_now = date('Y-m-d');
         $needUpdateStatus = false;
-        $name = trim($name);
-        $description = trim($description);
 
         if ($name) {
-            $task->name = $name;
+            $task->name = trim($name);
         }
-        if ($description) {
-            $task->description = $description;
+        if ($description || is_string($description)) {
+            $task->description = trim($description);
         }
         if ($begin_in) {
             $task->begin_in = $begin_in;

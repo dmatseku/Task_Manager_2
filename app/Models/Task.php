@@ -56,6 +56,27 @@ class Task extends Model
     ];
 
     /**
+     * array of types
+     *
+     * @var array
+     */
+    private static $types = [
+        1 => 'Development',
+        2 => 'Bug fix',
+        3 => 'Design',
+        4 => 'Other'
+    ];
+
+    /**
+     * get array of types
+     *
+     * @return array|string[]
+     */
+    public static function getTypesArray() {
+        return self::$types;
+    }
+
+    /**
      * Accessor for status
      *
      * @param $value

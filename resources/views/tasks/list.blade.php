@@ -12,6 +12,8 @@
 
 @section('content')
 
+    <p><span class="text-danger">*</span> Click on the name to see the details and edit.</p>
+
     {{--  Header  --}}
     <div class="container d-flex justify-content-between align-items-center">
         <h2 class="mb-0">Task List</h2>
@@ -19,7 +21,7 @@
             @csrf
             <input type="text" class="form-control w-100 @error('search') is-invalid @enderror" name="search" placeholder="Search">
         </form>
-        <a href="{{ route('task/next_status') }}" role="button" class="btn btn-secondary"><span class="h4 mb-0">+</span></a>
+        <a href="{{ route('task') }}" role="button" class="btn btn-secondary"><span class="h4 mb-0">+</span></a>
     </div>
 
     {{-- Table --}}

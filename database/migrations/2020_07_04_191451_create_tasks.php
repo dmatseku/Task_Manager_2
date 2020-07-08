@@ -23,7 +23,7 @@ class CreateTasks extends Migration
             $table->date('finish_in');
             $table->enum('status', ['created', 'began', 'finished'])->default('created');
             $table->enum('type', ['Development', 'Bug fix', 'Design', 'Other'])->default('Development');
-            $table->string('description', 500)->default('');
+            $table->string('description', 1024)->nullable()->default('');
             $table->timestamps();
         });
     }

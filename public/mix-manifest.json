@@ -4,5 +4,7 @@
     "/css/auth.css": "/css/auth.css",
     "/css/authorize.css": "/css/authorize.css",
     "/css/list.css": "/css/list.css",
-    "/js/list.js": "/js/list.js"
+    "/css/task.css": "/css/task.css",
+    "/js/list.js": "/js/list.js",
+    "/js/task.js": "/js/task.js"
 }

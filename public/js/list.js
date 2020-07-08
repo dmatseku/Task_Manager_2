@@ -105,6 +105,7 @@ $(document).ready(function () {
       data: sendData
     }).done(function (data) {
       $('#tbody').html(data);
+      load_events();
       searchLine.removeClass('is-invalid');
       searchLine.prop("disabled", false);
     }).fail(function (jqXHR, textStatus) {
@@ -114,6 +115,10 @@ $(document).ready(function () {
     });
     return false;
   });
+  load_events();
+});
+
+function load_events() {
   $(".next-status").submit(function () {
     var form = $(this);
     var sendData = form.serialize();
@@ -187,7 +192,7 @@ $(document).ready(function () {
     });
     return false;
   });
-});
+}
 
 /***/ }),
 

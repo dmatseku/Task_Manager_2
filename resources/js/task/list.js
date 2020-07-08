@@ -12,6 +12,7 @@ $(document).ready(function() {
             data: sendData
         }).done(function(data) {
             $('#tbody').html(data);
+            load_events();
 
             searchLine.removeClass('is-invalid');
             searchLine.prop("disabled", false);
@@ -24,6 +25,10 @@ $(document).ready(function() {
         return false;
     });
 
+    load_events();
+});
+
+function load_events() {
     $(".next-status").submit(function() {
         let form = $(this);
         let sendData = form.serialize();
@@ -100,4 +105,4 @@ $(document).ready(function() {
 
         return false;
     });
-});
+}

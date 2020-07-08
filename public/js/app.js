@@ -37618,10 +37618,21 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/sass/task/task.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/task/task.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!******************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/auth/auth.scss ./resources/sass/auth/authorize.scss ./resources/sass/task/list.scss ***!
-  \******************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/auth/auth.scss ./resources/sass/auth/authorize.scss ./resources/sass/task/list.scss ./resources/sass/task/task.scss ***!
+  \**************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37629,7 +37640,8 @@ __webpack_require__(/*! /home/kamikoto/Projects/web/php/task_manager_2/resources
 __webpack_require__(/*! /home/kamikoto/Projects/web/php/task_manager_2/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /home/kamikoto/Projects/web/php/task_manager_2/resources/sass/auth/auth.scss */"./resources/sass/auth/auth.scss");
 __webpack_require__(/*! /home/kamikoto/Projects/web/php/task_manager_2/resources/sass/auth/authorize.scss */"./resources/sass/auth/authorize.scss");
-module.exports = __webpack_require__(/*! /home/kamikoto/Projects/web/php/task_manager_2/resources/sass/task/list.scss */"./resources/sass/task/list.scss");
+__webpack_require__(/*! /home/kamikoto/Projects/web/php/task_manager_2/resources/sass/task/list.scss */"./resources/sass/task/list.scss");
+module.exports = __webpack_require__(/*! /home/kamikoto/Projects/web/php/task_manager_2/resources/sass/task/task.scss */"./resources/sass/task/task.scss");
 
 
 /***/ })

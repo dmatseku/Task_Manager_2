@@ -49,7 +49,7 @@
                         <input type="hidden" name="task_id" value="{{ $task['id'] }}">
                         <button class="btn btn-{{ $status_actions[$task['status'] - 1] }}">
                             <span class="h5 mb-0">
-                                @if($task['status'] === 1) Begin @else Finish @endif
+                                {{ ucfirst($status_actions[$task['status'] - 1]) }}
                             </span>
                         </button>
                     </form>
