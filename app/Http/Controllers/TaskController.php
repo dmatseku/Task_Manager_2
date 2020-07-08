@@ -82,7 +82,7 @@ class TaskController extends Controller
                 'finish_in' => $task->finish_in,
             ]);
         }
-        return redirect()->route('task', ['task_id' => $task->task_id]);
+        return redirect('task', ['task_id' => $task->task_id]);
     }
 
     /**
